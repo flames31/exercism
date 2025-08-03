@@ -1,0 +1,19 @@
+name: Auto Merge All PRs
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge the PR
+        uses: devops-infra/action-pull-request-automerge@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          merge_method: merge  # Options: merge, squash, rebase
